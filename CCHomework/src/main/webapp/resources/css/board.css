@@ -1,5 +1,6 @@
 table {
-	width: 100%;
+	width: 80%;
+	margin-left: 350px;
 	border-top: 1px solid #444444;
 	border-collapse: collapse;
 }

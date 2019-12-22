@@ -8,10 +8,12 @@
 		        <thead>
 		            <tr>
 		                <th>번호</th>
+		                <th>글종류</th>
 		                <th>제목</th>
+		                <th>내용</th>
 		                <th>작성자</th>
 		                <th>작성일</th>
-		                
+		                <th>조회수</th>
 		            </tr>
 		        </thead>
 		        <tbody>
@@ -32,12 +34,21 @@
         		getter.init = function(){
         			ajaxRequest("POST","./getBoardList","", function(result, response){
         				if(result == true){
-        					console.log(response)
+        					setContent(response)
         					
         				} else {
         					alert("response fail")
         				}
         			})
+        		}
+        		
+        		function setContent(response){
+        			let row
+  					for(let each in response){
+        				row = "<tr>"+"<td>"+response[each].id+"</td>"+"<td>"+response[each].sort+"</td>"+
+        				"<td>"+response[each].title+"</td>"+"<td>"+response[each].content+"</td>"+"<td>"+response[each].createdBy+"</td>"+"<td>"+response[each].YMD+"</td>"+"</tr>";
+	      				$(".table table tbody").append(row)
+  					}
         		}
         		
         		return getter

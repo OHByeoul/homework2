@@ -38,7 +38,7 @@ public class BoardController {
 	@GetMapping("/")
 	public String initBoardList(Model model) {
 		try {
-			//List<Board> boards = boardService.getBoardList();
+			List<Board> boards = boardService.getBoardList();
 
 		} catch (Exception e) {
 				//TODO
@@ -50,9 +50,8 @@ public class BoardController {
 	@PostMapping(value = "/getBoardList", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String getBoardList(Locale locale, Model model) {
-		//List<Board> boards = boardService.getBoardList();
-		String fakeData = "{"+"title"+":"+"가나"+","+"content"+":"+"내용"+"}";
-		return gson.toJson(fakeData);
+		List<Board> boards = boardService.getBoardList();
+		return gson.toJson(boards);
 	}
 
 }
