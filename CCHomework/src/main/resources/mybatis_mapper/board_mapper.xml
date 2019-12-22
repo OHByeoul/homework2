@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccmedia.homework">
+   <resultMap id="baord" type="com.ccmedia.homework.model.Board">
+      <result property="id" column="id"/>
+      <result property="sort" column="sort"/>
+      <result property="title" column="title"/>
+      <result property="content" column="content"/>
+      <result property="createdBy" column="createdBy"/>
+      <result property="YMD" column="YMD"/>
+      <result property="views" column="views"/>
+   </resultMap>
+   
+   <select id="getBoardList" resultType="com.ccmedia.homework.model.Board">
+           SELECT * FROM board
+        
+     </select>
+</mapper>
