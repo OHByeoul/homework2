@@ -22,3 +22,24 @@
 			alert("error")
 		}
 	}
+	
+	function listPaging(totalCnt, curPageNo, listSize, cb ){
+		   /*
+		   var totalCnt = ${totalCnt };   // totalcount
+		   var curPageNo = ${curPageNo };   // init page or current page
+		   var listSize = ${listSize };   // count per page
+		    */   
+		   var pageChanged = function(sPage) {
+		      $("input#curPageNo").val(sPage);
+		      cb(sPage);
+		   };
+		   
+		   // paging data init
+		   $("#divCollectDataPager").empty().pagerEx({
+
+		      totalItemCount : totalCnt,   // totalcount
+		      currentPage : curPageNo,   // current page
+		      recordPerPage : listSize,         // count per page
+		      pageIndexChanged : pageChanged
+		   });
+		}

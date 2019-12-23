@@ -1,6 +1,6 @@
 package com.ccmedia.homework.model;
 
-public class Board {
+public class BoardDTO {
 	private String id;
 	private String sort;
 	private String title;

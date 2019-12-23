@@ -3,6 +3,7 @@
 <%@ include file ="./header.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css">
 	<div class = "content">
+		<input type="hidden" name="curPageNum" id="curPageNum" value="${curPageNum}"/>
 		<div class = "table">
 		    <table>
 		        <thead>
@@ -19,29 +20,63 @@
 		        	
 		        </tbody>
 		    </table>
+		        <div class="paging">
+                    <div id="divCollectDataPager"></div>
+                </div>
 	    </div>
 	</div>
+	<style>
+		.btn-group {
+			margin-left : 950px;
+			margin-top : 20px;
+		}
+	</style>
     <script>
         	var boardObj = boardObj || function(){
         		var getter = function(){},
         		
-        		params = {
+        		paging = {
         			totalCnt : '0',
-        			curPageNum : '0'
+        			curPageNum : $("#curPageNum").val() ||'1',
+        			listSize : '0'
         		}
         		
-        		getter.init = function(){
-        			ajaxRequest("POST","./getBoardList","", function(result, response){
+        		getter.dataLoad = function(){
+        			ajaxRequest("POST","./getBoardList",paging, function(result, response){
         				if(result == true){
-        					setContent(response)
+        					setContent(response[1])
         					
+        					totalCnt = response[0].totalCnt
+        					curPageNum = response[0].curPageNum
+        					listSize = response[0].listSize
+        					
+        					pagingRefresh(totalCnt,curPageNum,listSize)
         				} else {
         					alert("response fail")
         				}
         			})
         		}
         		
+
+        		function pagingRefresh(totalCnt, curPageNum, listSize){
+        			listPaging(totalCnt,curPageNum,listSize, cb)
+        		}
+
+
+        		function cb(target){
+        			$('#curPageNo').val(target)
+        			paging.curPageNum = target
+//        			page.requestParameters.curPageNo = target
+	       			getter.dataLoad()
+        		}
+
+        		
+        		function setPagingData(){
+        			
+        		}
+        		
         		function setContent(response){
+        			$("tbody").empty()
         			let row
   					for(let each in response){
         				row = "<tr>"+"<td>"+response[each].id+"</td>"+"<td>"+response[each].sort+"</td>"+
@@ -54,7 +89,7 @@
         	}()
         	
         $(function(){
-        	boardObj.init()
+        	boardObj.dataLoad()
         	
         })
     </script>
