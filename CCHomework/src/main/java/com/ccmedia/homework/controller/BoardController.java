@@ -34,6 +34,8 @@ public class BoardController {
 	@Autowired
 	private BoardServiceImpl boardService;
 
+	@Autowired
+	private PagingDTO pagingDTO;
 	private Gson gson = new Gson();
 
 	/**
@@ -54,7 +56,6 @@ public class BoardController {
 	@PostMapping(value = "/getBoardList", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String getBoardList(@RequestBody Map<String,String> params, Model model) {
-		PagingDTO pagingDTO = new PagingDTO();
 		String curPageNum = params.get("curPageNum");
 		String listSize = Constants.listSize;
 		
