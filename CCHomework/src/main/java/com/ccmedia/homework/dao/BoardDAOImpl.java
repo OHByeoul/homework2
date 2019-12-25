@@ -19,7 +19,7 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public String getTotalCnt() {
+	public int getTotalCnt() {
 		return sqlSession.selectOne("getTotalCnt");
 	}
 

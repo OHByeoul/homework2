@@ -52,7 +52,7 @@
         					
         					pagingRefresh(totalCnt,curPageNum,listSize)
         				} else {
-        					alert("response fail")
+        					alert("ajax response fail")
         				}
         			})
         		}

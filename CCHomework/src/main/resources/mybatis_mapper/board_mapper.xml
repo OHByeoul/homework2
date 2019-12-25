@@ -22,7 +22,7 @@
         
      </select>
      
-     <select id="getTotalCnt" resultType="String">
+     <select id="getTotalCnt" resultType="int">
      	SELECT COUNT(*) FROM board
      </select>
 </mapper>
