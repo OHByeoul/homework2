@@ -52,7 +52,7 @@
         					
         					pagingRefresh(totalCnt,curPageNum,listSize)
         				} else {
-        					alert("ajax response fail")
+        					alert("getBoardList ajax response fail")
         				}
         			})
         		}
@@ -66,24 +66,21 @@
         		function cb(target){
         			$('#curPageNo').val(target)
         			paging.curPageNum = target
-//        			page.requestParameters.curPageNo = target
 	       			getter.dataLoad()
-        		}
-
-        		
-        		function setPagingData(){
-        			
         		}
         		
         		function setContent(response){
         			$("tbody").empty()
         			let row
   					for(let each in response){
-        				row = "<tr>"+"<td>"+response[each].id+"</td>"+"<td>"+response[each].sort+"</td>"+
-        				"<td><a href='./getContent/'"+response[each].id+"> "+response[each].title+"</a></td>"+"<td>"+response[each].createdBy+"</td>"+"<td>"+response[each].YMD+"</td>"+"</tr>";
+	        			let sort = setSortFormat(response[each].sort)
+        				row = "<tr>"+"<td>"+response[each].id+"</td>"+"<td>"+sort+"</td>"+
+        				"<td><a href='./getDetailContent/"+response[each].id+"'> "+response[each].title+"</a></td>"+"<td>"+response[each].createdBy+"</td>"+"<td>"+response[each].YMD+"</td>"+"</tr>";
 	      				$(".table table tbody").append(row)
   					}
         		}
+        		
+        		
         		
         		return getter
         	}()

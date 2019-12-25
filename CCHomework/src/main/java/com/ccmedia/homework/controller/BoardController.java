@@ -1,6 +1,5 @@
 package com.ccmedia.homework.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,11 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccmedia.homework.model.BoardDTO;
-import com.ccmedia.homework.model.PagingDTO;
 import com.ccmedia.homework.model.ResponseContainer;
 import com.ccmedia.homework.service.BoardServiceImpl;
-import com.ccmedia.homework.util.Constants;
-import com.google.gson.Gson;
 
 /**
  * Handles requests for the application home page.
@@ -61,14 +57,21 @@ public class BoardController {
 		return response.getErrorMessage();
 	}
 
-	@GetMapping(value = "/getSelectedBoard/{boardId}", produces = "application/json; charset=utf8")
+	@GetMapping(value = "/getDetailContent/{boardId}", produces = "application/json; charset=utf8")
+	public String initDetailContent(@PathVariable String boardId, Model model) {
+		model.addAttribute("boardId",boardId);
+		return "boardDetail";
+	}
+	
+	@PostMapping(value = "/getDetailContent", produces = "application/json; charset=utf8")
 	@ResponseBody
-	public String getSelectedBoard(@PathVariable String boardId, Model model) {
-		ResponseContainer<List> response = new ResponseContainer<List>();
+	public String getDetailContent(@RequestBody Map<String, String> params, Model model) {
+		ResponseContainer<BoardDTO> response = new ResponseContainer<BoardDTO>();
 		try {
-					//	return responseJson;
+			String responseJson = boardService.getDetailContent(params,response);
+			return responseJson;
 		} catch (Exception e) {
-			logger.error("BoardController /getSelectedBoard " + e.getMessage());
+			logger.error("BoardController /getDetailContent " + e.getMessage());
 		}
 		return response.getErrorMessage();
 	}

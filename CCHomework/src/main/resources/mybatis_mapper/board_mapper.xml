@@ -17,9 +17,12 @@
 	           	SELECT B.*, ROW_NUMBER() OVER(ORDER BY id) AS rnum
 	           	FROM board B
 	           	) B2
-          WHERE B2.rnum BETWEEN #{startNum} AND #{endNum} 
-           	
-        
+          WHERE B2.rnum BETWEEN #{startNum} AND #{endNum}    
+     </select>
+     
+     <select id="getDetailContent" parameterType="int" resultType="com.ccmedia.homework.model.BoardDTO">
+          SELECT * FROM board
+          WHERE id = #{boardId}
      </select>
      
      <select id="getTotalCnt" resultType="int">

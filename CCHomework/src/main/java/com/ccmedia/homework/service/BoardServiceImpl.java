@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ccmedia.homework.dao.BoardDAOImpl;
+import com.ccmedia.homework.model.BoardDTO;
 import com.ccmedia.homework.model.PagingDTO;
 import com.ccmedia.homework.model.ResponseContainer;
 import com.ccmedia.homework.util.Constants;
+import com.ccmedia.homework.util.Util;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -32,7 +34,9 @@ public class BoardServiceImpl implements BoardService {
 			response.setPagingDTO(pagingDTO);
 			params.put("startNum", startNum);
 			params.put("endNum", endNum);
-			response.setPayload(boardDAO.getBoardList(params));
+			List<BoardDTO> boards = boardDAO.getBoardList(params);
+			Util.setDateFormatList(boards);
+			response.setPayload(boards);
 		} catch (Exception e) {
 			response.setErrorMessage("1001");
 			e.printStackTrace();
@@ -40,6 +44,21 @@ public class BoardServiceImpl implements BoardService {
 		System.out.println("response json " + response.getResponseToJson());
 		return response.getResponseToJson();
 	}
+
+//	private void setDateFormat(List<BoardDTO> boards) {
+//		try {
+//			SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+//			SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			for(BoardDTO board : boards) {
+//				Date originDate = originFormat.parse(board.getYMD());
+//				String changedFormat = newFormat.format(originDate);
+//				board.setYMD(changedFormat);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//	}
 
 	private void setBoardPagingValue(int totalCnt, int curPageNum, int listSize) {
 		pagingDTO.setTotalCnt(totalCnt);
@@ -49,6 +68,19 @@ public class BoardServiceImpl implements BoardService {
 
 	public int getTotalCnt() {
 		return boardDAO.getTotalCnt();
+	}
+
+	public String getDetailContent(Map<String, String> params, ResponseContainer<BoardDTO> response) {
+		try {
+			int boardId = Integer.parseInt(params.get("boardId").toString());
+			BoardDTO board = boardDAO.getDetailContent(boardId);
+			Util.setDateFormat(board);
+			response.setPayload(board);
+		}catch (Exception e) {
+			response.setErrorMessage("1002");
+			e.printStackTrace();
+		}
+		return response.getResponseToJson();
 	}
 
 }

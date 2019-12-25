@@ -43,3 +43,15 @@
 		      pageIndexChanged : pageChanged
 		   });
 		}
+	
+	function setSortFormat(sort){
+		if(sort == 0){
+			return "일반";
+		} else if(sort == 1){
+			return "정보";
+		} else if(sort == 2){
+			return "리뷰";
+		} else if(sort == 3){
+			return "자유";
+		}
+	}

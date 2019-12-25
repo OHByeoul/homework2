@@ -23,4 +23,8 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne("getTotalCnt");
 	}
 
+	public BoardDTO getDetailContent(int boardId) {
+		return sqlSession.selectOne("getDetailContent", boardId);
+	}
+
 }
