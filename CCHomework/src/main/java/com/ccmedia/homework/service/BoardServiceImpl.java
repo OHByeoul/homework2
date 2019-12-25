@@ -45,21 +45,6 @@ public class BoardServiceImpl implements BoardService {
 		return response.getResponseToJson();
 	}
 
-//	private void setDateFormat(List<BoardDTO> boards) {
-//		try {
-//			SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-//			SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//			for(BoardDTO board : boards) {
-//				Date originDate = originFormat.parse(board.getYMD());
-//				String changedFormat = newFormat.format(originDate);
-//				board.setYMD(changedFormat);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//	}
-
 	private void setBoardPagingValue(int totalCnt, int curPageNum, int listSize) {
 		pagingDTO.setTotalCnt(totalCnt);
 		pagingDTO.setCurPageNum(curPageNum);
@@ -81,6 +66,19 @@ public class BoardServiceImpl implements BoardService {
 			e.printStackTrace();
 		}
 		return response.getResponseToJson();
+	}
+
+	public String createContent(BoardDTO boardDTO, ResponseContainer<BoardDTO> response) {
+		try {
+			int result = boardDAO.createContent(boardDTO);
+			if(result == 1) {
+				
+			}
+		} catch (Exception e) {
+			response.setErrorMessage("1003");
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

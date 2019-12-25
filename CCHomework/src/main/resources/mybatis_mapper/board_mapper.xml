@@ -25,6 +25,11 @@
           WHERE id = #{boardId}
      </select>
      
+     <insert id="createContent" parameterType="com.ccmedia.homework.model.BoardDTO">
+     	INSERT INTO BOARD
+		(ID, SORT, TITLE, CONTENT, CREATEDBY, YMD, VIEWS) VALUES (board_seq.NEXTVAL, #{sort}, #{title},#{content},#{createdBy},TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),'0')
+     </insert>
+     
      <select id="getTotalCnt" resultType="int">
      	SELECT COUNT(*) FROM board
      </select>

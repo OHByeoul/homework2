@@ -20,17 +20,15 @@
 		        	
 		        </tbody>
 		    </table>
+                <div class="button">
+                	<button type="button" onclick="boardObj.createForm()" id="write">글쓰기</button>
+                </div>
 		        <div class="paging">
                     <div id="divCollectDataPager"></div>
                 </div>
 	    </div>
 	</div>
-	<style>
-		.btn-group {
-			margin-left : 950px;
-			margin-top : 20px;
-		}
-	</style>
+
     <script>
         	var boardObj = boardObj || function(){
         		var getter = function(){},
@@ -55,6 +53,10 @@
         					alert("getBoardList ajax response fail")
         				}
         			})
+        		}
+        		
+        		getter.createForm = function(){
+        			location.href = "./createContent";
         		}
         		
 

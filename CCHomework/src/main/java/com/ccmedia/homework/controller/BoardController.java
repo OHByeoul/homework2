@@ -3,12 +3,15 @@ package com.ccmedia.homework.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,6 +59,25 @@ public class BoardController {
 		}
 		return response.getErrorMessage();
 	}
+	
+	@GetMapping(value = "/createContent")
+	public String initCreateContent(Model model) {
+		return "boardCreate";
+	}
+	
+	@PostMapping(value = "/createContent", produces = "application/json; charset=utf8")
+	public String createContent(@ModelAttribute BoardDTO boardDTO, Model model) {
+		ResponseContainer<BoardDTO> response = new ResponseContainer<BoardDTO>();
+		
+		try {
+			String responseJson = boardService.createContent(boardDTO,response);
+			return responseJson;
+		} catch (Exception e) {
+			logger.error("BoardController /createContent " + e.getMessage());
+		}
+		return response.getErrorMessage();
+	}
+
 
 	@GetMapping(value = "/getDetailContent/{boardId}", produces = "application/json; charset=utf8")
 	public String initDetailContent(@PathVariable String boardId, Model model) {
