@@ -70,6 +70,7 @@ public class BoardController {
 		ResponseContainer<BoardDTO> response = new ResponseContainer<BoardDTO>();
 		
 		try {
+			System.out.println("sort?>?>"+ boardDTO.getSort());
 			String responseJson = boardService.createContent(boardDTO,response);
 			return responseJson;
 		} catch (Exception e) {

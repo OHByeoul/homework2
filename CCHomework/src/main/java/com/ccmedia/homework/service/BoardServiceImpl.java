@@ -70,9 +70,13 @@ public class BoardServiceImpl implements BoardService {
 
 	public String createContent(BoardDTO boardDTO, ResponseContainer<BoardDTO> response) {
 		try {
+			
 			int result = boardDAO.createContent(boardDTO);
+			System.out.println("seq 값넘어옴? "+result);
+			System.out.println("값담김? "+boardDTO.getId());
 			if(result == 1) {
-				
+				int boardId = boardDTO.getId();
+				response.setPayload(boardDAO.getDetailContent(boardId));
 			}
 		} catch (Exception e) {
 			response.setErrorMessage("1003");

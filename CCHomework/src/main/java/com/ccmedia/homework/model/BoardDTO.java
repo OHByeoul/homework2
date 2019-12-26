@@ -1,7 +1,7 @@
 package com.ccmedia.homework.model;
 
 public class BoardDTO {
-	private String id;
+	private int id;
 	private String sort;
 	private String title;
 	private String content;
@@ -9,10 +9,10 @@ public class BoardDTO {
 	private String YMD;
 	private String views;
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getSort() {

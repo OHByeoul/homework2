@@ -26,8 +26,11 @@
      </select>
      
      <insert id="createContent" parameterType="com.ccmedia.homework.model.BoardDTO">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT board_seq.NEXTVAL FROM dual
+		</selectKey>
      	INSERT INTO BOARD
-		(ID, SORT, TITLE, CONTENT, CREATEDBY, YMD, VIEWS) VALUES (board_seq.NEXTVAL, #{sort}, #{title},#{content},#{createdBy},TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),'0')
+		(ID, SORT, TITLE, CONTENT, CREATEDBY, YMD, VIEWS) VALUES (#{id}, #{sort}, #{title},#{content},#{createdBy},TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),'0')
      </insert>
      
      <select id="getTotalCnt" resultType="int">
