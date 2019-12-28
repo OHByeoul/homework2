@@ -21,7 +21,7 @@
 		        </tbody>
 		    </table>
                 <div class="button">
-                	<button type="button" onclick="boardObj.createForm()" id="write">글쓰기</button>
+                	<button type="button" onclick="boardMng.createForm()" id="write">글쓰기</button>
                 </div>
 		        <div class="paging">
                     <div id="divCollectDataPager"></div>
@@ -30,7 +30,7 @@
 	</div>
 
     <script>
-        	var boardObj = boardObj || function(){
+        	var boardMng = boardMng || function(){
         		var getter = function(){},
         		
         		paging = {
@@ -40,7 +40,7 @@
         		}
         		
         		getter.dataLoad = function(){
-        			ajaxRequest("POST","./getBoardList",paging, function(result, response){
+        			ajaxRequest("POST","/board/getBoardList",paging, function(result, response){
         				if(result == true){
         					setContent(response[1])
         					
@@ -56,7 +56,7 @@
         		}
         		
         		getter.createForm = function(){
-        			location.href = "./createContent";
+        			location.href = "/board/createContent";
         		}
         		
 
@@ -77,7 +77,8 @@
   					for(let each in response){
 	        			let sort = setSortFormat(response[each].sort)
         				row = "<tr>"+"<td>"+response[each].id+"</td>"+"<td>"+sort+"</td>"+
-        				"<td><a href='./getDetailContent/"+response[each].id+"'> "+response[each].title+"</a></td>"+"<td>"+response[each].createdBy+"</td>"+"<td>"+response[each].YMD+"</td>"+"</tr>";
+        				"<td><a href='/board/getDetailContent/"+response[each].id+"'> "+response[each].title+"</a></td>"+"<td>"+response[each].createdBy+"</td>"
+        				+"<td>"+response[each].YMD+"</td>"+"<td>"+response[each].views+"</td>"+"</tr>";
 	      				$(".table table tbody").append(row)
   					}
         		}
@@ -88,7 +89,7 @@
         	}()
         	
         $(function(){
-        	boardObj.dataLoad()
+        	boardMng.dataLoad()
         	
         })
     </script>

@@ -33,7 +33,34 @@
 		(ID, SORT, TITLE, CONTENT, CREATEDBY, YMD, VIEWS) VALUES (#{id}, #{sort}, #{title},#{content},#{createdBy},TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),'0')
      </insert>
      
+      <update id="updateContent" parameterType="com.ccmedia.homework.model.BoardDTO">
+     	UPDATE board
+     	SET sort = #{sort}, title=#{title}, content = #{content}, createdBy = #{createdBy}, YMD = TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS')
+     	WHERE id = #{id} 
+     </update>
+     
+     <delete id="deleteContent" parameterType="int">
+     	DELETE FROM board
+     	WHERE id = #{boardId}
+     </delete>
+     
      <select id="getTotalCnt" resultType="int">
      	SELECT COUNT(*) FROM board
      </select>
+     
+     <select id="getCurrentId" resultType="int">
+     	SELECT MAX(id) FROM board
+     </select>
+     
+     <update id="setViews" parameterType="int" >
+     	UPDATE board
+     	SET views = NVL(TO_NUMBER(views),0)+1
+     	WHERE id = #{id}
+     </update>
+     
+	 <select id="getSearchedList" parameterType="String" resultType="com.ccmedia.homework.model.BoardDTO">
+          SELECT * FROM board 
+          WHERE title LIKE '%'||#{searchName}||'%'    
+     </select>
+
 </mapper>

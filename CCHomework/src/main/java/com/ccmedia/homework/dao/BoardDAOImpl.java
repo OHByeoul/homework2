@@ -31,4 +31,26 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.insert("createContent", board);
 	}
 
+	public int updateContent(BoardDTO board) {
+		return sqlSession.update("updateContent", board);
+	}
+
+	public int getCurrentId() {
+		return sqlSession.selectOne("getCurrentId");
+	}
+
+	public int deleteContent(int boardId) {
+		return sqlSession.delete("deleteContent", boardId);
+	}
+
+	public int setViews(int boardId) {
+		return sqlSession.update("setViews", boardId);
+		
+	}
+
+	public List<BoardDTO> getSearchedList(String searchName) {
+		return sqlSession.selectList("getSearchedList", searchName);
+	}
+
 }
+

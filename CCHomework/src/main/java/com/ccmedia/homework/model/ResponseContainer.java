@@ -11,10 +11,12 @@ public class ResponseContainer<T> {
 	private PagingDTO pagingDTO;
 	private Gson gson;
 	private String errorMessage;
+	private String successMessage;
 
 	public ResponseContainer() {
 		gson = new Gson();
 		errorMessage = "not defined errmessage";
+		successMessage = "success";
 	}
 
 	public PagingDTO getPagingDTO() {
@@ -56,6 +58,7 @@ public class ResponseContainer<T> {
 			response.add(pagingDTO);
 		}
 		response.add(payload);
+		response.add(successMessage);
 		return gson.toJson(response);
 	}
 

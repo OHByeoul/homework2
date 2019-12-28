@@ -28,7 +28,7 @@ public class BoardServiceImpl implements BoardService {
 			int curPageNum = Integer.parseInt(params.get("curPageNum").toString());
 			int totalCnt = boardDAO.getTotalCnt();
 			int startNum = (curPageNum - 1) * listSize + 1;
-			int endNum = startNum * listSize;
+			int endNum = curPageNum * listSize;
 
 			setBoardPagingValue(totalCnt, curPageNum, listSize);
 			response.setPagingDTO(pagingDTO);
@@ -59,9 +59,10 @@ public class BoardServiceImpl implements BoardService {
 		try {
 			int boardId = Integer.parseInt(params.get("boardId").toString());
 			BoardDTO board = boardDAO.getDetailContent(boardId);
+			boardDAO.setViews(boardId);
 			Util.setDateFormat(board);
 			response.setPayload(board);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			response.setErrorMessage("1002");
 			e.printStackTrace();
 		}
@@ -70,19 +71,58 @@ public class BoardServiceImpl implements BoardService {
 
 	public String createContent(BoardDTO boardDTO, ResponseContainer<BoardDTO> response) {
 		try {
-			
+
 			int result = boardDAO.createContent(boardDTO);
-			System.out.println("seq 값넘어옴? "+result);
-			System.out.println("값담김? "+boardDTO.getId());
-			if(result == 1) {
+
+			if (result == 1) {
 				int boardId = boardDTO.getId();
-				response.setPayload(boardDAO.getDetailContent(boardId));
+				response.setPayload(boardDTO);
 			}
 		} catch (Exception e) {
 			response.setErrorMessage("1003");
 			e.printStackTrace();
 		}
-		return null;
+		return response.getResponseToJson();
+	}
+
+	public String updateContent(BoardDTO boardDTO, ResponseContainer<BoardDTO> response) {
+		try {
+			int id = boardDAO.getCurrentId();
+			boardDTO.setId(id);
+			int result = boardDAO.updateContent(boardDTO);
+
+			if (result == 1) {
+				response.setPayload(boardDTO);
+			}
+		} catch (Exception e) {
+			response.setErrorMessage("1004");
+			e.printStackTrace();
+		}
+		return response.getResponseToJson();
+	}
+
+	public String deleteContent(Map<String, String> params, ResponseContainer<String> response) {
+		try {
+			int boardId = Integer.parseInt(params.get("boardId").toString());
+			response.setPayload(String.valueOf(boardDAO.deleteContent(boardId)));
+		} catch (Exception e) {
+			response.setErrorMessage("1005");
+			e.printStackTrace();
+		}
+		return response.getResponseToJson();
+	}
+
+	public List<BoardDTO> getSearchedList(String searchName, ResponseContainer<List> response) {
+		List<BoardDTO> boards = null;
+		try {
+			boards = boardDAO.getSearchedList(searchName);
+			Util.setDateFormatList(boards);
+		} catch (Exception e) {
+			response.setErrorMessage("1006");
+			e.printStackTrace();
+		}
+		return boards;
+		
 	}
 
 }
