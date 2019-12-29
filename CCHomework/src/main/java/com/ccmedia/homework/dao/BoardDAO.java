@@ -9,4 +9,18 @@ public interface BoardDAO {
 	public List<BoardDTO> getBoardList(Map params);
 	
 	public int getTotalCnt();
+
+	public BoardDTO getDetailContent(int boardId);
+
+	public int createContent(BoardDTO board);
+
+	public int updateContent(BoardDTO board);
+
+	public int getCurrentId();
+
+	public int deleteContent(int boardId);
+
+	public int setViews(int boardId);
+	
+	public List<BoardDTO> getSearchedList(String searchName);
 }

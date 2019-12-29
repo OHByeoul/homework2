@@ -30,7 +30,6 @@ public class CommentService {
 
 	public String createComment(CommentDTO commentDTO, ResponseContainer<List> response) {
 		try {
-			System.out.println("in??" + commentDTO.getBoardId()+" "+commentDTO.getContent()+" "+commentDTO.getCreatedBy());
 			int result = commentDAO.createComment(commentDTO);
 			if(result == 1) {
 				List<CommentDTO> comments = commentDAO.getComments(String.valueOf(commentDTO.getBoardId()));

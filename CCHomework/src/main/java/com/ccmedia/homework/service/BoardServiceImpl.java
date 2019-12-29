@@ -41,7 +41,6 @@ public class BoardServiceImpl implements BoardService {
 			response.setErrorMessage("1001");
 			e.printStackTrace();
 		}
-		System.out.println("response json " + response.getResponseToJson());
 		return response.getResponseToJson();
 	}
 
@@ -51,10 +50,12 @@ public class BoardServiceImpl implements BoardService {
 		pagingDTO.setListSize(listSize);
 	}
 
+	@Override
 	public int getTotalCnt() {
 		return boardDAO.getTotalCnt();
 	}
 
+	@Override
 	public String getDetailContent(Map<String, String> params, ResponseContainer<BoardDTO> response) {
 		try {
 			int boardId = Integer.parseInt(params.get("boardId").toString());
@@ -69,6 +70,7 @@ public class BoardServiceImpl implements BoardService {
 		return response.getResponseToJson();
 	}
 
+	@Override
 	public String createContent(BoardDTO boardDTO, ResponseContainer<BoardDTO> response) {
 		try {
 
@@ -85,6 +87,7 @@ public class BoardServiceImpl implements BoardService {
 		return response.getResponseToJson();
 	}
 
+	@Override
 	public String updateContent(BoardDTO boardDTO, ResponseContainer<BoardDTO> response) {
 		try {
 			int id = boardDAO.getCurrentId();
@@ -101,6 +104,7 @@ public class BoardServiceImpl implements BoardService {
 		return response.getResponseToJson();
 	}
 
+	@Override
 	public String deleteContent(Map<String, String> params, ResponseContainer<String> response) {
 		try {
 			int boardId = Integer.parseInt(params.get("boardId").toString());
@@ -112,6 +116,7 @@ public class BoardServiceImpl implements BoardService {
 		return response.getResponseToJson();
 	}
 
+	@Override
 	public List<BoardDTO> getSearchedList(String searchName, ResponseContainer<List> response) {
 		List<BoardDTO> boards = null;
 		try {

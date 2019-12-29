@@ -14,6 +14,7 @@ public class BoardDAOImpl implements BoardDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
+	@Override
 	public List<BoardDTO> getBoardList(Map params) {
 		return sqlSession.selectList("getBoardList", params);
 	}
@@ -23,31 +24,38 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne("getTotalCnt");
 	}
 
+	@Override
 	public BoardDTO getDetailContent(int boardId) {
 		return sqlSession.selectOne("getDetailContent", boardId);
 	}
-
+	
+	@Override
 	public int createContent(BoardDTO board) {
 		return sqlSession.insert("createContent", board);
 	}
-
+	
+	@Override
 	public int updateContent(BoardDTO board) {
 		return sqlSession.update("updateContent", board);
 	}
-
+	
+	@Override
 	public int getCurrentId() {
 		return sqlSession.selectOne("getCurrentId");
 	}
-
+	
+	@Override
 	public int deleteContent(int boardId) {
 		return sqlSession.delete("deleteContent", boardId);
 	}
-
+	
+	@Override
 	public int setViews(int boardId) {
 		return sqlSession.update("setViews", boardId);
 		
 	}
-
+	
+	@Override
 	public List<BoardDTO> getSearchedList(String searchName) {
 		return sqlSession.selectList("getSearchedList", searchName);
 	}

@@ -40,6 +40,7 @@
 			</div>
 			<a href="/board/createContent" class="w3-bar-item w3-button">글쓰기</a> <a href="/board/"
 				class="w3-bar-item w3-button">목록보기</a>
+				<!-- 
 			<div class="w3-dropdown-hover">
 				<button class="w3-button">
 					목록 정렬 <i class="fa fa-caret-down"></i>
@@ -50,6 +51,7 @@
 					<a href="#" class="w3-bar-item w3-button">종류 정렬</a>
 				</div>
 			</div>
+			 -->
 		</div>
 	</div>
 	<script>
