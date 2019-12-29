@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+.comment {
+	font-weight : bold;
+	padding-top : 10px;
+	padding-bottom : 10px;
+	margin-left : 150px;
+	margin-top : 10px;
+	border-bottom : 1px solid #ccc;
+	width : 80%;
+}
+
+.commentForm {
+	vertical-align : top;
+	font-weight : bold;
+	padding-top :10px;
+	margin-top : 50px;
+	margin-left : 150px;
+	width : 70%;
+	border-bottom : 1px solid #ccc;
+}
+
+.commentInfo {
+	margin-left : 150px;
+	vertical-align : top;
+}
+
+
+.commentContent {
+	width : 80%;
+	
+	vertical-align : top;
+	margin-bottom : 10px;
+	border-bottom : 1px solid #ccc;
+}

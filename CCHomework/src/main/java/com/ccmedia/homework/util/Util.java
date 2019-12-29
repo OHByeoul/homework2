@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.ccmedia.homework.model.BoardDTO;
+import com.ccmedia.homework.model.CommentDTO;
 
 public class Util {
 	private static SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -23,6 +24,17 @@ public class Util {
 			}
 	}
 	
+	public static void setCommentDateFormatList(List<CommentDTO> comments){
+		try {
+				for(CommentDTO comment : comments) {
+					Date originDate = originFormat.parse(comment.getYMD());
+					String changedFormat = newFormat.format(originDate);
+					comment.setYMD(changedFormat);
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+	}
 	public static void setDateFormat(BoardDTO board){
 		try {
 				Date originDate = originFormat.parse(board.getYMD());

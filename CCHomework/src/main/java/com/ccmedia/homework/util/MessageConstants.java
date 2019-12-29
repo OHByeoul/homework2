@@ -26,6 +26,10 @@ public class MessageConstants {
 			message = "삭제 실패";
 		case "1006":
 			message = "검색 실패";
+		case "1007":
+			message = "댓글 조회 실패";
+		case "1008":
+			message = "댓글 등록 실패";
 		default:
 			message = "there is not defined error";
 			break;

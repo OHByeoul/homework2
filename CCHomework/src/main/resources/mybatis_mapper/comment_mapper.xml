@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccmedia.homework">
+   <resultMap id="comments" type="com.ccmedia.homework.model.CommentDTO">
+      <result property="id" column="id"/>
+      <result property="content" column="content"/>
+      <result property="createdBy" column="createdBy"/>
+      <result property="YMD" column="YMD"/>
+      <result property="boardId" column="board_id"/>
+   </resultMap>
+   
+   <select id="getComments" parameterType="String" resultType="com.ccmedia.homework.model.CommentDTO">
+          SELECT * FROM comments
+          WHERE board_id = #{boardId}    
+     </select>
+     
+     <insert id="createComment" parameterType="com.ccmedia.homework.model.CommentDTO">
+     	INSERT INTO comments
+     	(id, content, createdBy, YMD, board_id)
+     	VALUES (comment_seq.NEXTVAL, #{content}, #{createdBy}, TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'), #{boardId})
+     </insert>
+
+</mapper>

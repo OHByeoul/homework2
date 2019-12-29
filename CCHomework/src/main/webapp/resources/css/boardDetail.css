@@ -25,3 +25,7 @@ table.table2 td {
 	vertical-align: top;
 	border-bottom: 1px solid #ccc;
 }
+
+.container {
+	margin-left : 350px;
+}

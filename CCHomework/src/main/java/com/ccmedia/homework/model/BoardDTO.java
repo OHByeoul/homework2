@@ -1,5 +1,8 @@
 package com.ccmedia.homework.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class BoardDTO {
 	private int id;
 	private String sort;

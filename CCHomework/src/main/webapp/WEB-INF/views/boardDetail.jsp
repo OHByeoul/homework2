@@ -3,6 +3,8 @@
 <%@ include file="./header.jsp"%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/boardDetail.css">
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/comment.css">
 <div class="container">
 	<form id="detailContent">
 		<input type="hidden" name="boardId" id="boardId" value="${boardId}" readonly="readOnly"/>
@@ -49,6 +51,16 @@
 			</tr>
 		</table>
 		</form>
+		<div class = "commentContainer">
+			<form class = "commentForm">
+				<label for="comment" >댓글</label>
+				<textarea name="content" id="commentInput" cols="70" rows="3"></textarea>
+				<button type="button" onclick="boardDetailMng.createComment()" >댓글작성</button>
+			</form>
+			<div class = "commentContent">
+				
+			</div>
+		</div>
 </div>
 
 <script>
@@ -59,7 +71,9 @@
 
 				params = {
 					boardId : $('#boardId').val(),
-					session : "${sessionScope.id}"
+					session : "${sessionScope.id}",
+					createdBy : '',
+					content : ''
 				}
 
 				requestParams = {
@@ -75,12 +89,44 @@
 										$("#updateBtn").hide()
 										$("#deleteBtn").hide()
 									}
+								} else {
+									alert('getDetailContent load fail')
+								}
+							})
+					getter.commentLoad()
+				}
+				
+				getter.commentLoad = function(){
+					ajaxRequest("POST", "/comment/getComments", params.boardId,
+							function(result, response){
+								if(result){
+									setComment(response[0])
+								} else {
+									alert('comment load fail')
+								}
+							})
+				}
+				
+				getter.createComment = function(){
+					getter.setCommentParam()
+					ajaxRequest("POST", "/comment/createComment", params,
+							function(result, response){
+								if(result){
+									setComment(response[0])
+									$("#commentInput").val('')
+								} else {
+									alert('createComment fail')
 								}
 							})
 				}
 
 				getter.setRequestParam = function() {
 					requestParams.form = $("#detailContent").serialize()
+				}
+				
+				getter.setCommentParam = function(){
+					params.content = $("#commentInput").val()
+					params.createdBy = params.session
 				}
 
 				getter.updateContent = function() {
@@ -123,6 +169,25 @@
 		$("#title").val(title)
 		$("#YMD").val(YMD)
 	}
+			
+			function setComment(response){
+				$(".commentContent").empty()
+				for(each in response){
+					let row = ''
+					let content = response[each].content
+					let createdBy = response[each].createdBy
+					let YMD = response[each].YMD
+					row = "<div class="+'commentInfo'+">"+
+						"<label for='creator'>작성자  </label>"+
+						"<span class='commentCreator' name='createdBy'>"+createdBy+"</span>"+
+						"<label for='ymd'>  작성일  </label>"+
+						"<span class="+'commentCreator'+">"+" ["+YMD+"] "+"</span>"+
+					"</div>"+
+					"<div class='comment' name='content'>"+content+
+					"</div>"
+					$(".commentContent").append(row)
+				}
+			}
 
 	$(function() {
 		boardDetailMng.dataLoad()
