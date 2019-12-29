@@ -7,14 +7,16 @@ import org.springframework.stereotype.Repository;
 import com.ccmedia.homework.model.UserDTO;
 
 @Repository
-public class UserDAO {
+public class UserDAOImpl implements UserDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	@Override
 	public UserDTO checkLogin(UserDTO user) {
 		return sqlSession.selectOne("checkLogin",user);
 	}
 
+	@Override
 	public int signUp(UserDTO user) {
 		return sqlSession.insert("signUp",user); 
 	}

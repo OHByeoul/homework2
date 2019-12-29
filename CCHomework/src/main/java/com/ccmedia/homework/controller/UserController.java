@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ccmedia.homework.model.UserDTO;
-import com.ccmedia.homework.service.UserService;
+import com.ccmedia.homework.service.UserServiceImpl;
 import com.ccmedia.homework.util.MessageConstants;
 
 @Controller
 @RequestMapping(value = "/", method = RequestMethod.GET)
 public class UserController {
 	@Autowired
-	private UserService userService;
+	private UserServiceImpl userService;
 	
 	@GetMapping({"/","login"})
 	public String initLogin(Model model) {

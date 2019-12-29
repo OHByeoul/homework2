@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccmedia.homework.model.CommentDTO;
 import com.ccmedia.homework.model.ResponseContainer;
-import com.ccmedia.homework.service.CommentService;
+import com.ccmedia.homework.service.CommentServiceImpl;
 
 @Controller
 @RequestMapping(value = "/comment", method = RequestMethod.GET)
@@ -25,7 +25,7 @@ public class CommentController {
 	private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
 	
 	@Autowired
-	CommentService commentService;
+	CommentServiceImpl commentService;
 	
 	@PostMapping(value="/getComments", produces = "application/json; charset=utf8")
 	@ResponseBody

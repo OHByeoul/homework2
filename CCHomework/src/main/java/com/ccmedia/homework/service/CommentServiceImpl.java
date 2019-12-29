@@ -5,16 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ccmedia.homework.dao.CommentDAO;
+import com.ccmedia.homework.dao.CommentDAOImpl;
 import com.ccmedia.homework.model.CommentDTO;
 import com.ccmedia.homework.model.ResponseContainer;
 import com.ccmedia.homework.util.Util;
 
 @Service
-public class CommentService {
+public class CommentServiceImpl implements CommentService{
 	@Autowired
-	CommentDAO commentDAO;
+	CommentDAOImpl commentDAO;
 	
+	@Override
 	public String getComments(String boardId,  ResponseContainer<List> response) {
 		try {
 			boardId = boardId.replaceAll("\"", "");
@@ -28,6 +29,7 @@ public class CommentService {
 		return response.getResponseToJson();
 	}
 
+	@Override
 	public String createComment(CommentDTO commentDTO, ResponseContainer<List> response) {
 		try {
 			int result = commentDAO.createComment(commentDTO);
