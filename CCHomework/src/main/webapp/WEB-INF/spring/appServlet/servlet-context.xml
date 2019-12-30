@@ -21,10 +21,24 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	
+	<beans:bean id="authenticationInterceptor" class="com.ccmedia.homework.util.AuthenticationInterceptor">
+	</beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/resources/**"/>
+			<exclude-mapping path="/" />
+			<exclude-mapping path="/login" />
+			<exclude-mapping path="/checkLogin" />
+			<exclude-mapping path="/signUp" />
+			<exclude-mapping path="/registUser" />
+			<beans:ref bean="authenticationInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+	
 	<context:component-scan base-package="com.ccmedia.homework.*" />
-	
-	
-	
-	
 	
 </beans:beans>

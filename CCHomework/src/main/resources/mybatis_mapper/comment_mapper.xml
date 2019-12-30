@@ -20,4 +20,8 @@
      	VALUES (comment_seq.NEXTVAL, #{content}, #{createdBy}, TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'), #{boardId})
      </insert>
 
+	 <delete id="deleteComments" parameterType="int">
+     	DELETE FROM comments
+     	WHERE board_id = #{boardId}
+     </delete>
 </mapper>

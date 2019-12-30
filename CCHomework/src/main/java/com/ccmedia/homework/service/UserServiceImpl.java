@@ -18,7 +18,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int signUp(UserDTO user) {
-		return userDAO.signUp(user);
+		UserDTO isUser = userDAO.userExistCheck(user);
+		if(isUser == null) {
+			return userDAO.signUp(user);
+		} else {
+			return -1;
+		}
 	}
 
 }

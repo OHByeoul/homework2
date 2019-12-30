@@ -52,6 +52,9 @@ public class UserController {
 	@PostMapping("/registUser")
 	public String signUp(@ModelAttribute UserDTO user, Model model) {
 		int result = userService.signUp(user);
-		return "redirect:/login";
+		if(result != 1) {
+			model.addAttribute("fail",MessageConstants.ExistAccount);
+		}
+		return "login";
 	}
 }

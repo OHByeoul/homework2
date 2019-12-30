@@ -3,6 +3,7 @@ package com.ccmedia.homework.util;
 public class MessageConstants {
 	
 	public static String LoginFail = "로그인에 실패하였습니다. id,pw를 확인하세요";
+	public static String ExistAccount = "해당 id가 이미 존재합니다.";
 	
 	public static String getMessage(String code) {
 		String message = "";

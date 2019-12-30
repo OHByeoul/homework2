@@ -108,6 +108,7 @@ public class BoardServiceImpl implements BoardService {
 	public String deleteContent(Map<String, String> params, ResponseContainer<String> response) {
 		try {
 			int boardId = Integer.parseInt(params.get("boardId").toString());
+			boardDAO.deleteComments(boardId);
 			response.setPayload(String.valueOf(boardDAO.deleteContent(boardId)));
 		} catch (Exception e) {
 			response.setErrorMessage("1005");

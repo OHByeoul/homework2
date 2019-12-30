@@ -60,5 +60,9 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList("getSearchedList", searchName);
 	}
 
+	public int deleteComments(int boardId) {
+		return sqlSession.delete("deleteComments", boardId);
+	}
+
 }
 

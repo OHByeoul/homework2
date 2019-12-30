@@ -16,5 +16,11 @@
      	INSERT INTO users
 		VALUES (user_seq.NEXTVAL, #{userId}, #{password})
      </insert>
+     
+    <select id="userExistCheck" parameterType="com.ccmedia.homework.model.UserDTO" resultType="com.ccmedia.homework.model.UserDTO">
+          SELECT * FROM users
+          WHERE user_id = #{userId} AND password = #{password}    
+     </select>
+     
 
 </mapper>

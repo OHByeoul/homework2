@@ -21,4 +21,8 @@ public class UserDAOImpl implements UserDAO {
 		return sqlSession.insert("signUp",user); 
 	}
 
+	public UserDTO userExistCheck(UserDTO user) {
+		return sqlSession.selectOne("userExistCheck",user);
+	}
+
 }
