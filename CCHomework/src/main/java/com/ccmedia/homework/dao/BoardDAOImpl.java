@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ccmedia.homework.model.BoardDTO;
+import com.ccmedia.homework.model.NoticeDTO;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -63,6 +64,8 @@ public class BoardDAOImpl implements BoardDAO {
 	public int deleteComments(int boardId) {
 		return sqlSession.delete("deleteComments", boardId);
 	}
+
+
 
 }
 

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ccmedia.homework.model.BoardDTO;
+import com.ccmedia.homework.model.NoticeDTO;
 import com.ccmedia.homework.model.PagingDTO;
 import com.ccmedia.homework.model.ResponseContainer;
 import com.ccmedia.homework.service.BoardServiceImpl;
@@ -84,6 +85,8 @@ public class BoardController {
 		}
 		return response.getErrorMessage();
 	}
+	
+	
 	
 	@GetMapping(value = "/updateContent/{boardId}")
 	public String initUpdateContent(@PathVariable String boardId, Model model) {

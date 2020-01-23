@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccmedia.homework">
+ 
+     
+  	<insert id="createNoticeContent" parameterType="com.ccmedia.homework.model.NoticeDTO">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT notice_seq.NEXTVAL FROM dual
+		</selectKey>
+     	INSERT INTO notice
+		(ID,  TITLE, created_by, created_date, CONTENT,is_post) 
+		VALUES 
+		(#{id}, #{title},#{createdBy},NVL(#{createdDate},TO_CHAR(SYSDATE,'YYYYMMDD')),#{content},#{isPost})
+     </insert>
+
+	 <select id="getNoticeDetailContent" parameterType="int" resultType="com.ccmedia.homework.model.NoticeDTO">
+          SELECT 
+          	id,
+          	title,
+          	created_by AS createdBy,
+          	created_date AS createdDate,
+          	content,
+          	is_post AS isPost
+          FROM notice
+          WHERE id = #{noticeId}
+     </select>
+     
+     <select id="getCurrentNoticeId" resultType="int">
+     	SELECT MAX(id) FROM notice
+     </select>
+     
+      <update id="updateNoticeContent" parameterType="com.ccmedia.homework.model.NoticeDTO">
+     	UPDATE notice
+     	SET title=#{title}, content = #{content}, created_by = #{createdBy}, 
+     	created_date = NVL(#{createdDate}, TO_CHAR(SYSDATE,'YYYYMMDD'))
+     	WHERE id = #{id} 
+     </update>
+</mapper>

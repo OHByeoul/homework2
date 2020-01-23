@@ -22,6 +22,7 @@
 			<li><a class="active" href="/board/">홈</a></li>
 			<li><a href="/board/">게시판 리스트</a></li>
 			<li><a href="/board/createContent">게시판 글쓰기</a></li>
+			<li><a href="/notice/createNoticeContent">공지사항 글쓰기</a></li>
 		</ul>
 	</div>
 

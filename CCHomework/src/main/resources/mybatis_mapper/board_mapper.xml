@@ -33,6 +33,7 @@
 		(ID, SORT, TITLE, CONTENT, CREATEDBY, YMD, VIEWS) VALUES (#{id}, #{sort}, #{title},#{content},#{createdBy},TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),'0')
      </insert>
      
+     
       <update id="updateContent" parameterType="com.ccmedia.homework.model.BoardDTO">
      	UPDATE board
      	SET sort = #{sort}, title=#{title}, content = #{content}, createdBy = #{createdBy}, YMD = TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS')

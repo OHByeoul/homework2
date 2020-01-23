@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ccmedia.homework.dao.BoardDAOImpl;
 import com.ccmedia.homework.model.BoardDTO;
+import com.ccmedia.homework.model.NoticeDTO;
 import com.ccmedia.homework.model.PagingDTO;
 import com.ccmedia.homework.model.ResponseContainer;
 import com.ccmedia.homework.util.Constants;
@@ -86,6 +87,10 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return response.getResponseToJson();
 	}
+	
+
+
+
 
 	@Override
 	public String updateContent(BoardDTO boardDTO, ResponseContainer<BoardDTO> response) {
