@@ -4,25 +4,26 @@ import java.util.List;
 import java.util.Map;
 
 import com.ccmedia.homework.model.NoticeDTO;
+import com.ccmedia.homework.model.ProjectDTO;
 
-public interface NoticeDAO {
+public interface ProjectDAO {
 //		public List<NoticeDTO> getBoardList(Map params);
 //		
 //		public int getTotalCnt();
 //
 //		public NoticeDTO getDetailContent(int boardId);
 
-		public int createNoticeContent(NoticeDTO notice);
+		public int createProjectContent(ProjectDTO project);
 
-		public NoticeDTO getNoticeDetailContent(int noticeId);
+		public ProjectDTO getProjectDetailContent(int noticeId);
 
-		public int updateNoticeContent(NoticeDTO noticeDTO);
+		public int updateProjectContent(ProjectDTO project);
 
 		public int getCurrentNoticeId();
 
 		public int getTotalCnt();
 
-		public List<NoticeDTO> getNoticeList(Map params);
+		public List<ProjectDTO> getProjectList(Map params);
 
 		int deleteContent(int noticeId);
 

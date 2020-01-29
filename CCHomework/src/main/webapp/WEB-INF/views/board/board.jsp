@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file ="./header.jsp" %>
+<%@ include file ="../header.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css">
 	<div class = "content">
 		<input type="hidden" name="curPageNum" id="curPageNum" value="${curPageNum}"/>
@@ -9,11 +9,9 @@
 		        <thead>
 		            <tr>
 		                <th>번호</th>
-		                <th>글종류</th>
 		                <th>제목</th>
 		                <th>작성자</th>
 		                <th>작성일</th>
-		                <th>조회수</th>
 		            </tr>
 		        </thead>
 		        <tbody>
@@ -40,7 +38,7 @@
         		}
         		
         		getter.dataLoad = function(){
-        			ajaxRequest("POST","/board/getBoardList",paging, function(result, response){
+        			ajaxRequest("POST","/notice/getNoticeList",paging, function(result, response){
         				if(result == true){
         					setContent(response[1])
         					
@@ -50,13 +48,13 @@
         					
         					pagingRefresh(totalCnt,curPageNum,listSize)
         				} else {
-        					alert("getBoardList ajax response fail")
+        					alert("getNoticeList ajax response fail")
         				}
         			})
         		}
         		
         		getter.createForm = function(){
-        			location.href = "/board/createContent";
+        			location.href = "/notice/createNoticeContent";
         		}
         		
 
@@ -75,10 +73,9 @@
         			$("tbody").empty()
         			let row
   					for(let each in response){
-	        			let sort = setSortFormat(response[each].sort)
-        				row = "<tr>"+"<td>"+response[each].id+"</td>"+"<td>"+sort+"</td>"+
-        				"<td><a href='/board/getDetailContent/"+response[each].id+"'> "+response[each].title+"</a></td>"+"<td>"+response[each].createdBy+"</td>"
-        				+"<td>"+response[each].YMD+"</td>"+"<td>"+response[each].views+"</td>"+"</tr>";
+        				row = "<tr>"+"<td>"+response[each].id+"</td>"+
+        				"<td><a href='/notice/getNoticeDetailContent/"+response[each].id+"'> "+response[each].title+"</a></td>"+"<td>"+response[each].createdBy+"</td>"
+        				+"<td>"+response[each].createdDate+"</td>"+"</tr>";
 	      				$(".table table tbody").append(row)
   					}
         		}
@@ -93,5 +90,5 @@
         	
         })
     </script>
-<%@ include file = "./footer.jsp" %>
+<%@ include file = "../footer.jsp" %>
 

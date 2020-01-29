@@ -20,8 +20,9 @@
 	<div class="header menu">
 		<ul>
 			<li><a class="active" href="/board/">홈</a></li>
-			<li><a href="/board/">게시판 리스트</a></li>
-			<li><a href="/board/createContent">게시판 글쓰기</a></li>
+			<li><a href="/board/">공지사항 목록</a></li>
+			<li><a href="/project/">수주현황 목록</a></li>
+			<li><a href="/project/createProjectContent">수주현황 글쓰기</a></li>
 			<li><a href="/notice/createNoticeContent">공지사항 글쓰기</a></li>
 		</ul>
 	</div>
@@ -35,12 +36,12 @@
 			</div>
 			<div style="margin-left : 15px">
 				<form action="/board/searchBoardList">
-				<input type="text" id="search" name="searchName" placeholder="검색할 제목 입력" required>
+				<input type="text" id="search" name="searchName" placeholder="검색할 공지사항 제목 입력" required>
 				<button type = "submit" id="searchBtn">검색</button>
 				</form>
 			</div>
-			<a href="/board/createContent" class="w3-bar-item w3-button">글쓰기</a> <a href="/board/"
-				class="w3-bar-item w3-button">목록보기</a>
+			<a href="/board/" class="w3-bar-item w3-button">공지사항 목록보기</a>
+			<a href="/project/" class="w3-bar-item w3-button">수주현황 목록보기</a>
 				<!-- 
 			<div class="w3-dropdown-hover">
 				<button class="w3-button">

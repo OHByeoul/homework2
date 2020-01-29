@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="./header.jsp"%>
+<%@ include file="../header.jsp"%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/boardDetail.css">
 	<link rel="stylesheet"
@@ -35,8 +35,8 @@
 						</tr>
 						<tr>
 							<td>게시 여부</td>
-							<td><input type="radio" name="isPost" value="y" checked="checked">게시</td>
-							<td><input type="radio" name="isPost" value="n">미게시</td>
+							<td><input type="radio" name="isPost" value="y" checked="checked" onclick="return(false)">게시</td>
+							<td><input type="radio" name="isPost" value="n" onclick="return(false)">미게시</td>
 						</tr>
 					</table>
 
@@ -142,5 +142,5 @@
 
 	})
 </script>
-<%@ include file="./footer.jsp"%>
+<%@ include file="../footer.jsp"%>
 

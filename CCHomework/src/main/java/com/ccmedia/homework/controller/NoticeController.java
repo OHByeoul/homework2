@@ -1,5 +1,6 @@
 package com.ccmedia.homework.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ccmedia.homework.model.BoardDTO;
 import com.ccmedia.homework.model.NoticeDTO;
 import com.ccmedia.homework.model.ResponseContainer;
 import com.ccmedia.homework.service.NoticeServiceImpl;
@@ -31,7 +31,24 @@ public class NoticeController {
 	
 	@GetMapping(value = "/createNoticeContent")
 	public String initNoticeCreateContent(Model model) {
-		return "noticeCreate";
+		return "notice/noticeCreate";
+	}
+	
+	@PostMapping(value = "/getNoticeList", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String getBoardList(@RequestBody Map<String, String> params, Model model) {
+		ResponseContainer<List> response = new ResponseContainer<List>();
+		try {
+			String curPageNum = params.get("curPageNum");
+
+			String responseJson = noticeService.getNoticeList(params, response);
+
+			model.addAttribute("curPageNum", curPageNum);
+			return responseJson;
+		} catch (Exception e) {
+			logger.error("NoticeController /getNoticeList " + e.getMessage());
+		}
+		return response.getErrorMessage();
 	}
 	
 	@PostMapping(value = "/createNoticeContent", produces = "application/json; charset=utf8")
@@ -51,7 +68,7 @@ public class NoticeController {
 	@GetMapping(value = "/getNoticeDetailContent/{noticeId}", produces = "application/json; charset=utf8")
 	public String initNoticeDetailContent(@PathVariable String noticeId, Model model) {
 		model.addAttribute("noticeId",noticeId);
-		return "noticeDetail";
+		return "notice/noticeDetail";
 	}
 	
 	@PostMapping(value = "/getNoticeDetailContent", produces = "application/json; charset=utf8")
@@ -70,7 +87,7 @@ public class NoticeController {
 	@GetMapping(value = "/updateNoticeContent/{noticeId}")
 	public String initUpdateContent(@PathVariable String noticeId, Model model) {
 		model.addAttribute("noticeId", noticeId);
-		return "noticeUpdate";
+		return "notice/noticeUpdate";
 	}
 	
 	@PostMapping(value = "/updateNoticeContent", produces = "application/json; charset=utf8")
@@ -83,6 +100,19 @@ public class NoticeController {
 			return responseJson;
 		} catch (Exception e) {
 			logger.error("NoticeController /updateContent " + e.getMessage());
+		}
+		return response.getErrorMessage();
+	}
+	
+	@PostMapping(value = "/deleteContent", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String deleteContent(@RequestBody Map<String, String> params, Model model) {
+		ResponseContainer<String> response = new ResponseContainer<String>();
+		try {
+			String responseJson = noticeService.deleteContent(params, response);
+			return responseJson;
+		} catch (Exception e) {
+			logger.error("NoticeController /deleteContent " + e.getMessage());
 		}
 		return response.getErrorMessage();
 	}

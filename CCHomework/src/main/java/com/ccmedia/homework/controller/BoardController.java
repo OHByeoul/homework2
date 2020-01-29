@@ -47,7 +47,7 @@ public class BoardController {
 		if(pagingDTO.getCurPageNum() > 0) {
 			model.addAttribute("curPageNum", pagingDTO.getCurPageNum());
 		}
-		return "board";
+		return "board/board";
 	}
 
 	@PostMapping(value = "/getBoardList", produces = "application/json; charset=utf8")

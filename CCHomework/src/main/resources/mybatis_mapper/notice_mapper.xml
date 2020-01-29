@@ -32,7 +32,33 @@
       <update id="updateNoticeContent" parameterType="com.ccmedia.homework.model.NoticeDTO">
      	UPDATE notice
      	SET title=#{title}, content = #{content}, created_by = #{createdBy}, 
-     	created_date = NVL(#{createdDate}, TO_CHAR(SYSDATE,'YYYYMMDD'))
+     	created_date = NVL(#{createdDate}, TO_CHAR(SYSDATE,'YYYYMMDD')),
+     	is_post = #{isPost}
      	WHERE id = #{id} 
      </update>
+     
+        <select id="getNoticeList" parameterType="map" resultType="com.ccmedia.homework.model.NoticeDTO">
+          SELECT N2.* 
+	      FROM ( 
+	           	SELECT id,
+          			title,
+          			created_by AS createdBy,
+          			created_date AS createdDate,
+          			content,
+          			is_post AS isPost, 
+          			ROW_NUMBER() OVER(ORDER BY id DESC) AS rnum
+	           	FROM notice N
+	           	) N2
+          WHERE N2.rnum BETWEEN #{startNum} AND #{endNum}    
+     </select>
+     
+     <select id="getTotalNoticeCnt" resultType="int">
+     	SELECT COUNT(*) FROM notice
+     </select>
+     
+     <delete id="deleteNoticeContent" parameterType="int">
+     	DELETE FROM notice
+     	WHERE id = #{noticeId}
+     </delete>
+     
 </mapper>

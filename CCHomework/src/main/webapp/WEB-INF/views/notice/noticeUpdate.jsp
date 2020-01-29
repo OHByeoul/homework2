@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="./header.jsp"%>
+<%@ include file="../header.jsp"%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/boardDetail.css">
 <div class="container">
@@ -34,7 +34,7 @@
 						</tr>
 						<tr>
 							<td>게시 여부</td>
-							<td><input type="radio" name="isPost" value="y" checked="checked">게시</td>
+							<td><input type="radio" name="isPost" value="y">게시</td>
 							<td><input type="radio" name="isPost" value="n">미게시</td>
 						</tr>
 					</table>
@@ -113,14 +113,18 @@
 		$("#content").val(content)
 		$("#title").val(title)
 		$("#createdDate").val(createdDate)
+		
 	}
 			
-	function setPostOption(option){
-		if(option=='y'){
-			$('input:radio[name=isPost]:input[value=' + option + ']').attr("checked", true);
-		} else if(option=='n'){
-			$('input:radio[name=isPost]:input[value=' + option + ']').attr("checked", true);
+	function setPostOption(isPost){
+		if(isPost == 'y'){
+			$('input:radio[name=isPost]:input[value=y]').attr("checked", true);
+			$('input:radio[name=isPost]:input[value=n]').attr("checked", false);
+		} else {
+			$('input:radio[name=isPost]:input[value=y]').attr("checked", false);
+			$('input:radio[name=isPost]:input[value=n]').attr("checked", true);
 		}
+	}
 				
 
 	$(function() {
@@ -128,5 +132,5 @@
 
 	})
 </script>
-<%@ include file="./footer.jsp"%>
+<%@ include file="../footer.jsp"%>
 

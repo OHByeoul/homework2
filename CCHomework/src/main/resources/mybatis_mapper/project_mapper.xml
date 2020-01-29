@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccmedia.homework">
+ 
+     
+  	<insert id="createProjectContent" parameterType="com.ccmedia.homework.model.ProjectDTO">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT project_seq.NEXTVAL FROM dual
+		</selectKey>
+     	INSERT INTO projectStatus
+		(id,  project_title, created_by, created_date, project_start,project_end,is_post) 
+		VALUES 
+		(#{id}, #{projectTitle},#{createdBy},NVL(#{createdDate},TO_CHAR(SYSDATE,'YYYYMMDD')),#{projectStart},#{projectEnd},#{isPost})
+     </insert>
+
+	 <select id="getProjectDetailContent" parameterType="int" resultType="com.ccmedia.homework.model.ProjectDTO">
+          SELECT 
+          	id,
+          	project_title AS projectTitle,
+          	created_by AS createdBy,
+          	created_date AS createdDate,
+          	project_start AS projectStart,
+          	project_end AS projectEnd,
+          	is_post AS isPost
+          FROM projectStatus
+          WHERE id = #{projectId}
+     </select>
+     
+     <select id="getCurrentProjectId" resultType="int">
+     	SELECT MAX(id) FROM project
+     </select>
+     
+      <update id="updateProjectContent" parameterType="com.ccmedia.homework.model.ProjectDTO">
+     	UPDATE projectStatus
+     	SET project_title=#{projectTitle}, created_by = #{createdBy},
+     	project_start = #{projectStart},
+     	project_end = #{projectEnd}, 
+     	created_date = NVL(#{createdDate}, TO_CHAR(SYSDATE,'YYYYMMDD')),
+     	is_post = #{isPost}
+     	WHERE id = #{id} 
+     </update>
+     
+        <select id="getProjectList" parameterType="map" resultType="com.ccmedia.homework.model.ProjectDTO">
+          SELECT N2.* 
+	      FROM ( 
+	           	SELECT id,
+          			project_title AS projectTitle,
+          			created_by AS createdBy,
+          			created_date AS createdDate,
+          			project_start AS projectStart,
+          			project_end AS projectEnd,
+          			is_post AS isPost, 
+          			ROW_NUMBER() OVER(ORDER BY id DESC) AS rnum
+	           	FROM projectStatus N
+	           	) N2
+          WHERE N2.rnum BETWEEN #{startNum} AND #{endNum}    
+     </select>
+     
+     <select id="getTotalProjectCnt" resultType="int">
+     	SELECT COUNT(*) FROM projectStatus
+     </select>
+     
+     <delete id="deleteProjectContent" parameterType="int">
+     	DELETE FROM projectStatus
+     	WHERE id = #{projectId}
+     </delete>
+     
+</mapper>
