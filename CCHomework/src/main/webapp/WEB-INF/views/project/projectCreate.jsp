@@ -84,7 +84,7 @@
 		}
 
 		getter.submit = function() {
-			$("#submit").click()			
+			//$("#submit").click()			
 		
 			let validate = getter.setRequestParam()
 			if(validate){

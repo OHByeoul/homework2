@@ -5,12 +5,12 @@
      
   	<insert id="createProjectContent" parameterType="com.ccmedia.homework.model.ProjectDTO">
 		<selectKey keyProperty="id" resultType="int" order="BEFORE">
-			SELECT LAST_INSERT_ID()
+			SELECT project_seq.NEXTVAL FROM dual
 		</selectKey>
      	INSERT INTO projectStatus
 		(id,  project_title, created_by, created_date, project_start,project_end,is_post) 
 		VALUES 
-		(#{id}, #{projectTitle},#{createdBy},IFNULL(#{createdDate},DATE_FORMAT(NOW(),'%Y%m%d')),#{projectStart},#{projectEnd},#{isPost})
+		(#{id}, #{projectTitle},#{createdBy},NVL(#{createdDate},TO_CHAR(SYSDATE,'YYYYMMDD')),#{projectStart},#{projectEnd},#{isPost})
      </insert>
 
 	 <select id="getProjectDetailContent" parameterType="int" resultType="com.ccmedia.homework.model.ProjectDTO">
@@ -35,7 +35,7 @@
      	SET project_title=#{projectTitle}, created_by = #{createdBy},
      	project_start = #{projectStart},
      	project_end = #{projectEnd}, 
-     	created_date = IFNULL(#{createdDate}, DATE_FORMAT(NOW(),'%Y%m%d')),
+     	created_date = NVL(#{createdDate}, TO_CHAR(SYSDATE,'YYYYMMDD')),
      	is_post = #{isPost}
      	WHERE id = #{id} 
      </update>

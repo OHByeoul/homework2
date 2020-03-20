@@ -81,7 +81,7 @@ public class NoticeServiceImpl implements NoticeService {
 			params.put("endNum", endNum);
 			List<NoticeDTO> notices = noticeDAO.getNoticeList(params);
 			System.out.println("len "+notices);
-			Util.setNoticeFormatList(notices);
+			//Util.setNoticeFormatList(notices);
 			response.setPayload(notices);
 		} catch (Exception e) {
 			response.setErrorMessage("1001");
